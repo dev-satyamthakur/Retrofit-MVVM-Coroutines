@@ -19,8 +19,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val quoteSer = MyRetrofitBuilder.getInstance().create(RetrofitService::class.java)
-        val repo = MainRepository(quoteSer)
+        val repo = (application as QuoteApplication).quoteRespository
+
         mainViewModel = ViewModelProvider(this, MainViewModelFactory(repo))
             .get(MainViewModel::class.java)
 

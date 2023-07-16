@@ -7,9 +7,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.satyamthakur.kotlinsingleton.ViewModel.MainViewModel
 import com.satyamthakur.kotlinsingleton.ViewModel.MainViewModelFactory
-import com.satyamthakur.kotlinsingleton.api.MyRetrofitBuilder
-import com.satyamthakur.kotlinsingleton.api.RetrofitService
-import com.satyamthakur.kotlinsingleton.repository.MainRepository
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val repo = (application as QuoteApplication).quoteRespository
+        val repo = (application as QuoteApplication).quoteRepository
 
         mainViewModel = ViewModelProvider(this, MainViewModelFactory(repo))
             .get(MainViewModel::class.java)

@@ -8,7 +8,7 @@ import com.satyamthakur.kotlinsingleton.repository.MainRepository
 
 class QuoteApplication: Application() {
 
-    lateinit var quoteRespository: MainRepository
+    lateinit var quoteRepository: MainRepository
 
     override fun onCreate() {
         super.onCreate()
@@ -18,7 +18,7 @@ class QuoteApplication: Application() {
     private fun initialize() {
         val quoteSer = MyRetrofitBuilder.getInstance().create(RetrofitService::class.java)
         val db = QuoteDatabase.getDatabase(applicationContext)
-        quoteRespository = MainRepository(quoteSer, db)
+        quoteRepository = MainRepository(quoteSer, db)
     }
 
 }

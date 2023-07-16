@@ -18,7 +18,7 @@ class QuoteApplication: Application() {
     private fun initialize() {
         val quoteSer = MyRetrofitBuilder.getInstance().create(RetrofitService::class.java)
         val db = QuoteDatabase.getDatabase(applicationContext)
-        quoteRepository = MainRepository(quoteSer, db)
+        quoteRepository = MainRepository(quoteSer, db, applicationContext)
     }
 
 }

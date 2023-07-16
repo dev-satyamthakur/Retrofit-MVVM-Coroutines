@@ -3,6 +3,7 @@ package com.satyamthakur.kotlinsingleton
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.satyamthakur.kotlinsingleton.ViewModel.MainViewModel
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel.quotes.observe(this, Observer {
             Log.d("MYAPP", it.toString())
+            Toast.makeText(this, it.results.size.toString(), Toast.LENGTH_SHORT).show()
         })
 
     }

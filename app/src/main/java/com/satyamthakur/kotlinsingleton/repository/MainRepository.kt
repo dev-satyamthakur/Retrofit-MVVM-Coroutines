@@ -30,6 +30,9 @@ class MainRepository(
                     quoteDatabase.getQuoteDao().addQuotes(result.body()!!.results)
                     quotesLiveData.postValue(Response.Success(result.body()))
                 }
+                else {
+                    quotesLiveData.postValue(Response.Error("API Error"))
+                }
             } catch (e: Exception) {
                 quotesLiveData.postValue(Response.Error(e.message.toString()))
                 Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()

@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 is Response.Error -> {
-                    Toast.makeText(this, "Something Went Wrong!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, it.message.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
         })

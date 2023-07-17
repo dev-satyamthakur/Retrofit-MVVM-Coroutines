@@ -15,23 +15,30 @@ class MainRepository(
     private val context: Context
 ) {
 
-    private val quotesLiveData = MutableLiveData<QuoteResponse>()
 
-    val quotes: LiveData<QuoteResponse>
+    private val quotesLiveData = MutableLiveData<Response<QuoteResponse>>()
+
+    val quotes: LiveData<Response<QuoteResponse>>
         get() = quotesLiveData
 
     suspend fun getQuotes(page: Int) {
 
         if (NetworkUtils.isNetworkAvailable(context)) {
-            val result = quoteService.getQuotes(page)
-            if (result?.body() != null) {
-                quoteDatabase.getQuoteDao().addQuotes(result.body()!!.results)
-                quotesLiveData.postValue(result.body())
+            try {
+                val result = quoteService.getQuotes(page)
+                if (result?.body() != null) {
+                    quoteDatabase.getQuoteDao().addQuotes(result.body()!!.results)
+                    quotesLiveData.postValue(Response.Success(result.body()))
+                }
+            } catch (e: Exception) {
+                quotesLiveData.postValue(Response.Error(e.message.toString()))
+                Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
             }
+
         } else {
             val quotes = quoteDatabase.getQuoteDao().getQoutes()
             val quoteList = QuoteResponse(1, 1, 1, quotes, 1, 1)
-            quotesLiveData.postValue(quoteList)
+            quotesLiveData.postValue(Response.Success(quoteList))
         }
 
     }

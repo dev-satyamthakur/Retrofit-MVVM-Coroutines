@@ -5,12 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.satyamthakur.kotlinsingleton.models.QuoteResponse
 import com.satyamthakur.kotlinsingleton.repository.MainRepository
+import com.satyamthakur.kotlinsingleton.repository.Response
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val repository: MainRepository): ViewModel() {
 
-    val quotes: LiveData<QuoteResponse>
+    val quotes: LiveData<Response<QuoteResponse>>
         get() = repository.quotes
 
     init {
